@@ -6,7 +6,7 @@ class VaccineRepository {
             const vaccine = await Vaccine.create({ name });
             return vaccine;
         } catch (error) {
-            throw error; // ✅ Don't re-wrap
+            throw error; 
         }
     }
 
@@ -17,6 +17,29 @@ class VaccineRepository {
                     id: vaccineId
                 }
             });
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async updateVaccine(vaccineId, data ) {
+        try {
+            const vaccine = await Vaccine.update(data, {
+                where: {
+                    id: vaccineId
+                }
+            });
+            return vaccine;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getVaccine(vaccineId){
+        try {
+            const vaccine = await Vaccine.findByPk(vaccineId);
+            return vaccine;
         } catch (error) {
             throw error;
         }
