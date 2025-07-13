@@ -14,9 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Vaccine.init({
-    name: DataTypes.STRING,
-    allowNull: false,
-    unique: true
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true  
+    }
   }, {
     sequelize,
     modelName: 'Vaccine',
