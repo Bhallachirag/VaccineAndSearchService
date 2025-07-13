@@ -25,11 +25,14 @@ class VaccineRepository {
 
     async updateVaccine(vaccineId, data ) {
         try {
-            const vaccine = await Vaccine.update(data, {
-                where: {
-                    id: vaccineId
-                }
-            });
+            // const vaccine = await Vaccine.update(data, {
+            //     where: {
+            //         id: vaccineId
+            //     }
+            // });
+            const vaccine = await Vaccine.findByPk(vaccineId);
+            vaccine.name = data.name;
+            await vaccine.save();
             return vaccine;
         } catch (error) {
             throw error;

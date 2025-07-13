@@ -9,4 +9,4 @@ router.patch('/vaccine/:id', VaccineController.update);
 router.get('/vaccine/:id', VaccineController.get);
 
 
-module.exports = router;
+module.exports = router;    
