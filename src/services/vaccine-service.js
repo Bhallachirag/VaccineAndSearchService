@@ -40,6 +40,15 @@ class VaccineService {
             throw error;
         }
     }
+
+    async getAllVaccines() {
+        try {
+            const vaccines = await this.vaccineRepository.getAllVaccines();
+            return vaccines;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = VaccineService;

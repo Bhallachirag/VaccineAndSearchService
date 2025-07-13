@@ -37,12 +37,21 @@ class VaccineRepository {
         } catch (error) {
             throw error;
         }
-    }
+    }   
 
     async getVaccine(vaccineId){
         try {
             const vaccine = await Vaccine.findByPk(vaccineId);
             return vaccine;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAllVaccines() {
+        try {
+            const vaccines = await Vaccine.findAll();
+            return vaccines;
         } catch (error) {
             throw error;
         }

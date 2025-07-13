@@ -7,6 +7,7 @@ router.post('/vaccine', VaccineController.create);
 router.delete('/vaccine/:id', VaccineController.destroy);
 router.patch('/vaccine/:id', VaccineController.update);
 router.get('/vaccine/:id', VaccineController.get);
+router.get('/vaccine', VaccineController.getAll);
 
 
 module.exports = router;    
