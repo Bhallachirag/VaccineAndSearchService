@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { Vaccine } = require('../models/index');
 
 class VaccineRepository {
@@ -48,8 +50,18 @@ class VaccineRepository {
         }
     }
 
-    async getAllVaccines() {
+    async getAllVaccines(filter) {
         try {
+            if(filter.name) {
+                const vaccines = await Vaccine.findAll({
+                    where: {
+                        name: {
+                            [Op.startsWith] : filter.name
+                        }
+                    }
+                });
+                return vaccines;
+            }
             const vaccines = await Vaccine.findAll();
             return vaccines;
         } catch (error) {

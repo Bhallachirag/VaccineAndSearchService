@@ -41,9 +41,9 @@ class VaccineService {
         }
     }
 
-    async getAllVaccines() {
+    async getAllVaccines(filter) {
         try {
-            const vaccines = await this.vaccineRepository.getAllVaccines();
+            const vaccines = await this.vaccineRepository.getAllVaccines({name: filter.name});
             return vaccines;
         } catch (error) {
             throw error;

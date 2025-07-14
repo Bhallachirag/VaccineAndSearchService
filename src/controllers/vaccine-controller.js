@@ -84,7 +84,7 @@ const get = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const vaccines = await vaccineService.getAllVaccines();
+        const vaccines = await vaccineService.getAllVaccines(req.query);
         return res.status(200).json({
             data: vaccines,
             success: true,  
