@@ -21,11 +21,15 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       vaccineId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Vaccines', 
+          model: 'Vaccines',  
           key: 'id',
           as: 'vaccineId'
         },

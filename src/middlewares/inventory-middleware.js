@@ -5,7 +5,7 @@ const validateCreateInventory = (req, res, next) => {
         !req.body.batchNumber ||
         !req.body.quantity ||
         !req.body.expiryDate ||
-        // !req.body.price ||
+        !req.body.price ||
         !req.body.vaccineId
     ) {
         return res.status(ClientErrorCodes.BAD_REQUEST).json({

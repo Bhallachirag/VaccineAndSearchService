@@ -5,13 +5,14 @@ const inventoryService = new InventoryService();
 
 const create = async (req, res) => {
     try {
-        const inventoyRequestData = {
+        const inventoryRequestData = {
                 batchNumber: req.body.batchNumber,
                 expiryDate: req.body.expiryDate,
                 quantity: req.body.quantity,
-                vaccineId: req.body.vaccineId
+                vaccineId: req.body.vaccineId,
+                price: req.body.price
             }
-        const inventoryItem = await inventoryService.createInventory(inventoyRequestData);
+        const inventoryItem = await inventoryService.createInventory(inventoryRequestData);
         return res.status(SuccessCodes.CREATED).json({
             data: inventoryItem,
             success: true,

@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
+    price: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
     vaccineId: {
       type: DataTypes.INTEGER,
       allowNull: false,
