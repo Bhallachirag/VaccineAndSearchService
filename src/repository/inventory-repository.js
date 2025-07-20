@@ -1,4 +1,6 @@
 const { Inventory } = require('../models/index');
+const { Vaccine } = require('../models/vaccine'); 
+
 
 class InventoryRepository {
 
@@ -62,6 +64,19 @@ class InventoryRepository {
             throw error;
         }
     }
+
+   async getInventoriesByVaccineId(vaccineId) {
+    try {
+        const inventories = await Inventory.findAll({
+            where: { vaccineId }
+        });
+        return inventories;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 }
 
 module.exports = InventoryRepository;

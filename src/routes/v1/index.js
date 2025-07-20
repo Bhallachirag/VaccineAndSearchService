@@ -13,6 +13,9 @@ router.get('/vaccine/:id', VaccineController.get);
 router.get('/vaccine', VaccineController.getAll);
 router.patch('/vaccine/:id', VaccineController.update);
 
+router.get('/vaccine/:id/inventories', inventoryController.getByVaccineId);
+
+
 
 router.post(
     '/inventory', 

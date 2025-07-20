@@ -54,6 +54,15 @@ class InventoryService {
             throw error;
         }
     }
+
+      async getInventoriesByVaccineId(vaccineId) {
+        try {
+            const inventories = await this.inventoryRepository.getInventoriesByVaccineId(vaccineId);
+            return inventories;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = InventoryService;

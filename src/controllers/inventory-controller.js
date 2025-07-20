@@ -110,10 +110,33 @@ const getAll = async (req, res) => {
     }
 }
 
+const getByVaccineId = async (req, res) => {
+    const vaccineId = req.params.id;
+    try {
+        const inventories = await inventoryService.getInventoriesByVaccineId(vaccineId);
+
+        return res.status(200).json({
+            success: true,
+            data: inventories,
+            message: `Inventories for vaccine ID ${vaccineId} fetched successfully`,
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            data: {},
+            message: 'Something went wrong',
+            err: error
+        });
+    }
+};
+
 module.exports = {
     create,
     destroy,
     update,
     get,
-    getAll
+    getAll,
+    getByVaccineId
 };
