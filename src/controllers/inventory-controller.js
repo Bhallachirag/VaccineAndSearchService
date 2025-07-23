@@ -132,11 +132,65 @@ const getByVaccineId = async (req, res) => {
     }
 };
 
+const updateByVaccineId = async(req, res) => {
+        try {
+            const vaccineId = req.params.id;
+            const quantity = req.body.quantity;
+
+            console.log("Vaccine ID:", vaccineId);
+            console.log("Quantity to deduct:", quantity);
+
+            const updatedInventory = await inventoryService.updateInventoryByVaccineId(vaccineId, req.body.quantity);
+            return res.status(200).json({
+                success: true,
+                message: 'Successfully updated inventory quantity',
+                data: updatedInventory,
+                err: {}
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                success: false,
+                message: 'Something went wrong',
+                data: {},
+                err: error
+            });
+        }
+    }   
+
+// inventory-controller.js
+const addInventory = async (req, res) => {
+  try {
+    const  vaccineId  = req.params.id;
+    const  quantityToAdd  = req.body.quantity;
+
+    const response = await inventoryService.addInventoryByVaccineId(vaccineId, quantityToAdd);
+
+    return res.status(200).json({
+      success: true,
+      message: "Inventory updated successfully",
+      data: response,
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      data: {},
+      err: error.message,
+    });
+  }
+};
+
+
+
 module.exports = {
     create,
     destroy,
     update,
     get,
     getAll,
-    getByVaccineId
+    getByVaccineId,
+    updateByVaccineId,
+    addInventory
 };

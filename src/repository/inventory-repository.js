@@ -66,17 +66,62 @@ class InventoryRepository {
     }
 
    async getInventoriesByVaccineId(vaccineId) {
-    try {
-        const inventories = await Inventory.findAll({
-            where: { vaccineId }
-        });
-        return inventories;
-    } catch (error) {
-        throw error;
+        try {
+            const inventories = await Inventory.findAll({
+                where: { vaccineId }
+            });
+            return inventories;
+        } catch (error) {
+            throw error;
+        }
+
     }
+
+    async updateByVaccineId(vaccineId, quantityToDeduct) {
+    const inventories = await Inventory.findAll({
+        where: { vaccineId: vaccineId },
+        order: [['expiryDate', 'ASC']] // Optional: deduct from earliest expiry first
+    });
+
+    if (!inventories || inventories.length === 0) {
+        throw new Error('Inventory not found for the given vaccine ID');
+    }
+
+    // Calculate total available stock
+    const totalAvailable = inventories.reduce((sum, inv) => sum + inv.quantity, 0);
+    if (totalAvailable < quantityToDeduct) {
+        throw new Error('Not enough stock in inventory');
+    }
+
+    // Deduct from multiple batches
+    let remaining = quantityToDeduct;
+    for (const inventory of inventories) {
+        if (remaining <= 0) break;
+
+        const deduction = Math.min(inventory.quantity, remaining);
+        inventory.quantity -= deduction;
+        remaining -= deduction;
+        await inventory.save(); // Save updated batch
+    }
+
+    return true;
 }
 
 
+
+    async addInventoryByVaccineId(vaccineId, quantityToAdd) {
+        const inventory = await Inventory.findOne({ where: { vaccineId } });
+        if (inventory) {
+            inventory.quantity += quantityToAdd;
+            await inventory.save();
+            return inventory;
+        } else {
+            return await Inventory.create({
+                vaccineId,
+                quantity: quantityToAdd
+            });
+        }
+    }
 }
 
 module.exports = InventoryRepository;

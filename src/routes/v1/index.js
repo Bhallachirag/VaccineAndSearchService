@@ -15,6 +15,7 @@ router.patch('/vaccine/:id', VaccineController.update);
 
 router.get('/vaccine/:id/inventories', inventoryController.getByVaccineId);
 
+router.patch('/vaccine/:id/inventories/add', inventoryController.addInventory); // Admin
 
 
 router.post(
@@ -26,5 +27,7 @@ router.delete('/inventory/:id', inventoryController.destroy);
 router.put('/inventory/:id', inventoryController.update);
 router.get('/inventory/:id', inventoryController.get);
 router.get('/inventories', inventoryController.getAll);
+router.patch('/vaccine/:id/inventories', inventoryController.updateByVaccineId);
+
 
 module.exports = router;    

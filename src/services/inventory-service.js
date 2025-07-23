@@ -63,6 +63,25 @@ class InventoryService {
             throw error;
         }
     }
+
+    async updateInventoryByVaccineId(vaccineId, quantityToDeduct) {
+        try {
+            const updatedInventory = await this.inventoryRepository.updateByVaccineId(vaccineId, quantityToDeduct);
+            return updatedInventory;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async addInventoryByVaccineId(vaccineId, quantityToAdd) {
+        try {
+            return await this.inventoryRepository.addInventoryByVaccineId(vaccineId, quantityToAdd);
+        } catch (error) {
+            console.log("Something went wrong in service layer - addInventoryByVaccineId");
+            throw error;
+        }
+    }
+    
 }
 
 module.exports = InventoryService;
