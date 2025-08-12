@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true  
+    },
+    mrp: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,
