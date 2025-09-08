@@ -49,6 +49,15 @@ class VaccineService {
             throw error;
         }
     }
+
+    async getVaccinesWithInventory(filter = {}) {
+    try {
+        const vaccines = await this.vaccineRepository.getVaccinesWithInventory(filter);
+        return vaccines;
+    } catch (error) {
+        throw error;
+    }
+}
 }
 
 module.exports = VaccineService;

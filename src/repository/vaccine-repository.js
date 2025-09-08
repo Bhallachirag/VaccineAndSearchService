@@ -27,11 +27,6 @@ class VaccineRepository {
 
     async updateVaccine(vaccineId, data ) {
         try {
-            // const vaccine = await Vaccine.update(data, {
-            //     where: {
-            //         id: vaccineId
-            //     }
-            // });
             const vaccine = await Vaccine.findByPk(vaccineId);
             vaccine.name = data.name;
             await vaccine.save();
@@ -68,6 +63,36 @@ class VaccineRepository {
             throw error;
         }
     }
+
+    async getVaccinesWithInventory(filter = {}) {
+    try {
+        const { Inventory } = require('../models/index');
+        
+        const whereClause = {};
+        if (filter.name) {
+            whereClause.name = {
+                [Op.iLike]: `%${filter.name}%`
+            };
+        }
+
+        const vaccines = await Vaccine.findAll({
+            where: whereClause,
+            include: [{
+                model: Inventory,
+                where: {
+                    quantity: { [Op.gt]: 0 },
+                    expiryDate: { [Op.gt]: new Date() }
+                },
+                required: true,
+                order: [['expiryDate', 'ASC']]
+            }]
+        });
+        
+        return vaccines;
+    } catch (error) {
+        throw error;
+    }
+}
 }
 
 module.exports = VaccineRepository;

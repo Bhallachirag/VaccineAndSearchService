@@ -8,7 +8,7 @@ const inventoryController = require('../../controllers/inventory-controller');
 const router = express.Router();
 
 router.post('/vaccine', VaccineController.create);
-router.delete('/vaccine/:id', VaccineController.destroy);
+router.delete('/vaccine/:id', VaccineController.destroy);   
 router.get('/vaccine/:id', VaccineController.get);
 router.get('/vaccine', VaccineController.getAll);
 router.patch('/vaccine/:id', VaccineController.update);
@@ -17,6 +17,7 @@ router.get('/vaccine/:id/inventories', inventoryController.getByVaccineId);
 
 router.patch('/vaccine/:id/inventories/add', inventoryController.addInventory); 
 
+router.get('/vaccines-with-inventory', VaccineController.getVaccinesWithInventory);
 
 router.post(
     '/inventory', 
@@ -25,7 +26,7 @@ router.post(
 );
 router.delete('/inventory/:id', inventoryController.destroy);
 router.put('/inventory/:id', inventoryController.update);
-router.get('/inventory/:id', inventoryController.get);
+router.get('/inventory/:id', inventoryController.get);  
 router.get('/inventories', inventoryController.getAll);
 router.patch('/vaccine/:id/inventories', inventoryController.updateByVaccineId);
 

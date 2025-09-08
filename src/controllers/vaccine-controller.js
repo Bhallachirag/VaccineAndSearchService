@@ -102,10 +102,31 @@ const getAll = async (req, res) => {
     }
 }
 
+const getVaccinesWithInventory = async (req, res) => {
+    try {
+        const vaccines = await vaccineService.getVaccinesWithInventory(req.query);
+        return res.status(200).json({
+            data: vaccines,
+            success: true,  
+            message: "Vaccines with inventory received successfully",
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: "Not able to get vaccines with inventory",
+            err: error
+        });
+    }
+}
+
 module.exports = {
     create,
     destroy,
     update,      
     get,
-    getAll
+    getAll,
+    getVaccinesWithInventory
 }
