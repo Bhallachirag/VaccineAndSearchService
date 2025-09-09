@@ -18,6 +18,12 @@ if (config.use_env_variable) {
     dialect: config.dialect,
   });
 }
+console.log("Database Config: ", {
+  host: config.host,
+  username: config.username,
+  database: config.database,
+  dialect: config.dialect,
+});
 
 fs
   .readdirSync(__dirname)
