@@ -63,4 +63,5 @@ FRONT_END_LINK=http://localhost:5173
 - [Reminder Service](https://github.com/Bhallachirag/ReminderService)
 
 ### Author
--Chirag Bhalla
+
+- **Chirag Bhalla**
