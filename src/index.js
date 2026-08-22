@@ -12,7 +12,7 @@ const setupAndStartServer = async () => {
     const app = express();
 
     app.use(cors({
-        origin: FRONT_END_LINK || true,
+        origin: (origin, callback) => callback(null, true),
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
